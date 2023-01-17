@@ -48,7 +48,7 @@ jobs:
     #       reporter: dotnet-trx
 
     # PR merged or main tag created, create the KrimsonTemplate NuGet package
-    - if: github.event_name == 'push')
+    - if: github.event_name == 'push'
       name: Create Krimson template NuGet package
       run: >-
         dotnet pack
