@@ -1,0 +1,62 @@
+name: .NET Core
+
+on:
+  # Run when:
+  #  - The main branch is pushed to, i.e. a PR targeting main is merged
+  #  - The repo is tagged
+  workflow_dispatch:
+
+  push:
+    branches:
+      - "*"
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: Github Actions Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.*
+      - name: Build Reason
+        run: echo ${{github.ref}} and ${{github.event_name}}
+      - name: Build with dotnet
+        run: >-
+          dotnet build
+          --configuration Release
+          --nologo
+      # - name: Run tests
+      #   run: >-
+      #     dotnet test
+      #     --configuration Release
+      #     --logger trx
+      #     --no-build
+      #     --nologo
+      # - name: Publish test results
+      #   uses: dorny/test-reporter@v1
+      #   if: always()
+      #   with:
+      #       name: .NET tests
+      #       path: '**/*.trx'
+      #       reporter: dotnet-trx
+
+      # PR merged or main tag created, create the KrimsonTemplate NuGet package
+      - if: github.event_name == 'push'
+        name: Create Krimson template NuGet package
+        run: >-
+          dotnet pack
+          --configuration Release
+          --nologo
+
+      # PR merged, push prelease and KrimsonTemplate Krimson packages to feedz
+      - if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads')
+        name: Push prelease and KrimsonTemplate Krimson packages to feedz
+        run: ./push.sh Krimson feedz ${{ secrets.FEEDZ_KEY }}
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
