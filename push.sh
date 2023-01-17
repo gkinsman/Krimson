@@ -4,7 +4,7 @@ NUGET_API_KEY=$3
 
 if [ "$TARGET_PACKAGE" = "Krimson" ]; then
   # Publish both the Krimson and the KrimsonTemplate packages
-  TARGET_PACKAGES="$(find -wholename "./src/Krimson/**/*.nupkg")"
+  TARGET_PACKAGES="$(find -wholename "./src/Krimson*/**/*.nupkg")"
 fi
 
 if [ "$NUGET_TARGET_SERVICE" = "feedz" ]; then
