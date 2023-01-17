@@ -4,6 +4,8 @@ on:
   # Run when:
   #  - The main branch is pushed to, i.e. a PR targeting main is merged
   #  - The repo is tagged
+  workflow_dispatch:
+
   push:
     branches:
       - "*"
