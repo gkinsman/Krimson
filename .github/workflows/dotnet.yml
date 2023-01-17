@@ -1,9 +1,6 @@
 name: .NET Core
 
 on:
-  # Run on all PRs
-  pull_request:
-
   # Run when:
   #  - The main branch is pushed to, i.e. a PR targeting main is merged
   #  - The repo is tagged
