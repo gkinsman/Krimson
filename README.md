@@ -1,6 +1,6 @@
 # Krimson
 
-Just you wait... 
+Just you wait...
 
 A helper library for .NET that not only greatly simplifies the usage of Kafka but also covers common streaming scenarios including re-balancing.
 
@@ -155,7 +155,7 @@ public class IngressController : ControllerBase {
     public IngressController(KrimsonProducer producer) => Producer = producer;
 
     KrimsonProducer Producer { get; }
-    
+
     [HttpPost(Name = "DispatchTelemetry")]
     public Task Dispatch(DeviceTelemetry telemetry) =>
         Producer.Produce(message: telemetry, key: telemetry.DeviceId);
@@ -198,7 +198,7 @@ class TelemetryModule : KrimsonProcessorModule {
 
 ## Built With
 
-* [Jetbrains Rider](https://www.jetbrains.com/rider/)
+- [Jetbrains Rider](https://www.jetbrains.com/rider/)
 
 ## Contributing
 
@@ -206,7 +206,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-* **Sérgio Silveira** - *Initial work* - [RagingKore](https://github.com/ragingkore)
+- **Sérgio Silveira** - _Initial work_ - [RagingKore](https://github.com/ragingkore)
 
 ## License
 
